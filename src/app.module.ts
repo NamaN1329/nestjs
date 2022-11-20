@@ -1,28 +1,19 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSource } from 'typeorm';
-import { User } from './users/user.entity';
-import { UsersModule } from './users/users.module';
+import { ormConfig } from './database/config/ormconfig';
+import { AuthModule } from './components/auth/auth.module';
+import { UserModule } from './components/user/user.module';
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mongodb',
-      host: 'localhost',
-      port: 27017,
-      username: 'TestApps',
-      password: '',
-      database: 'testApps',
-      entities: [User],
-      synchronize: true,
-      useUnifiedTopology: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
     }),
-    UsersModule,
+    TypeOrmModule.forRoot(ormConfig()),
+    AuthModule,
+    UserModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
-export class AppModule {
-  constructor(private dataSource: DataSource) {}
-}
+export class AppModule {}
