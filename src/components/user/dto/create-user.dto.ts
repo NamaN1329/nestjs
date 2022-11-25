@@ -1,4 +1,5 @@
-import { IsEmail, IsNotEmpty, MinLength } from "class-validator";
+import { IsEmail, IsNotEmpty, MinLength, Validate } from 'class-validator';
+import { CustomEmailValidation } from '../validations/customEmailValidation';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -6,8 +7,10 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsEmail()
+  @Validate(CustomEmailValidation)
   email: string;
 
   @IsNotEmpty()
+  @MinLength(8)
   password: string;
 }
