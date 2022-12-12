@@ -5,6 +5,7 @@ import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { UserRepository } from 'src/repositories/user.repository';
 import { UniqueEmailConstraint } from './validations/uniqueEmail';
+import { MatchConstraint } from './validations/match.decorator';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
@@ -17,7 +18,8 @@ import { UniqueEmailConstraint } from './validations/uniqueEmail';
     provide: 'UserServiceInterface',
     useClass: UserService,
   },
-  UniqueEmailConstraint
+  UniqueEmailConstraint, MatchConstraint
   ],
+  exports:[UserService]
 })
 export class UserModule {}

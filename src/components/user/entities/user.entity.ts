@@ -4,6 +4,9 @@ import {
   Entity,
   ObjectIdColumn,
   ObjectID,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
 } from 'typeorm';
 import { hashSync, genSaltSync } from 'bcrypt';
 
@@ -28,15 +31,14 @@ export class User {
   })
   password: string;
 
-  @Column({
-    type: 'date',
-  })
-  createdAt: any;
+  @CreateDateColumn()
+  createdDate: Date;
 
-  @Column({
-    type: 'date',
-  })
-  updatedAt: any;
+  @UpdateDateColumn()
+  updatedDate: Date;
+
+  @DeleteDateColumn()
+  deletedDate: Date;
 
   @BeforeInsert()
   async hashPassword() {

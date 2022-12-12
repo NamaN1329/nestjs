@@ -1,5 +1,6 @@
 import {
-    registerDecorator, ValidationOptions,
+    registerDecorator,
+    ValidationOptions,
     ValidatorConstraint,
     ValidatorConstraintInterface,
     ValidationArguments
