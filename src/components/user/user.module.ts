@@ -3,9 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
-import { CustomEmailValidation } from './validations/customEmailValidation';
-import { UserRepositoryInterface } from './interface/user.repository.interface';
 import { UserRepository } from 'src/repositories/user.repository';
+import { UniqueEmailConstraint } from './validations/uniqueEmail';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
@@ -17,7 +16,8 @@ import { UserRepository } from 'src/repositories/user.repository';
   {
     provide: 'UserServiceInterface',
     useClass: UserService,
-  }
+  },
+  UniqueEmailConstraint
   ],
 })
 export class UserModule {}
