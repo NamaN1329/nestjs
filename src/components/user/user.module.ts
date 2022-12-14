@@ -18,7 +18,7 @@ import { MatchConstraint } from './validations/match.decorator';
     provide: 'UserServiceInterface',
     useClass: UserService,
   },
-  UniqueEmailConstraint, MatchConstraint
+  UniqueEmailConstraint, MatchConstraint, UserService
   ],
   exports:[UserService]
 })
